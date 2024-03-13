@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import PlayerCard from "../../components/playerCard/PlayerCard";
 import Card from "../../components/card/Card";
@@ -69,7 +69,6 @@ const spadesJ = require("../../assets/spades/J.png");
 const spadesK = require("../../assets/spades/K.png");
 const spadesQ = require("../../assets/spades/Q.png");
 
-
 // Importing joker card images
 const joker1 = require("../../assets/joker/Joker_1.png");
 const joker2 = require("../../assets/joker/Joker_2.png");
@@ -77,13 +76,20 @@ const joker2 = require("../../assets/joker/Joker_2.png");
 interface Card {
   suit: string;
   rank: string;
-  image: string; // Path to the card image
+  image: string;
+  color: string; // Path to the card image
 }
 
 const GameBoard = () => {
   const [deck, setDeck] = useState<Card[]>(generateDeck());
   const [flippedCards, setFlippedCards] = useState<Card[]>([]);
   const [matchedCards, setMatchedCards] = useState<Card[]>([]);
+
+  useEffect(() => {
+    // Generate and shuffle the deck when the component mounts
+    const newDeck = generateDeck();
+    setDeck(shuffleDeck(newDeck));
+  }, []);
 
   const handleExit = () => {
     console.log("TODO!!!!");
@@ -92,27 +98,57 @@ const GameBoard = () => {
   const handleRestart = () => {
     console.log("Restarting the game...");
   };
-
   const handleCardClick = (clickedCard: Card) => {
-    // Placeholder logic
-    console.log("Clicked card:", clickedCard);
-
-    if (flippedCards.includes(clickedCard) || matchedCards.includes(clickedCard)) {
-      return; // Ignore click if the card is already flipped or matched
+    // If there are already 2 flipped cards or the clicked card is already flipped, do nothing
+    if (flippedCards.length === 2 || flippedCards.includes(clickedCard)) {
+      return;
     }
-  
+
     // Toggle the clicked card in flippedCards array
-    const updatedFlippedCards = [...flippedCards];
-    updatedFlippedCards.push(clickedCard);
+    const updatedFlippedCards = [...flippedCards, clickedCard];
     setFlippedCards(updatedFlippedCards);
+
+    // If two cards are flipped, check for a match
+    if (updatedFlippedCards.length === 2) {
+      const [firstCard, secondCard] = updatedFlippedCards;
+
+      // If ranks match and colors match, update matchedCards array and remove cards from the board
+      if (
+        firstCard.rank === secondCard.rank &&
+        firstCard.color === secondCard.color
+      ) {
+        setMatchedCards([...matchedCards, firstCard, secondCard]);
+        setFlippedCards([]); // Reset flipped cards
+        setDeck((deck) =>
+          deck.filter((card) => card !== firstCard && card !== secondCard)
+        ); // Remove matched cards from the deck
+        // Update scores or perform any other relevant actions
+      } else {
+        // If either the ranks or colors don't match, flip cards back after a delay
+        setTimeout(() => {
+          setFlippedCards([]);
+        }, 1000);
+      }
+    }
   };
+
+  console.log("matchedCards", matchedCards);
 
   // Function to render a card based on game state
   // Update UI based on game state
   // Update UI based on game state
   const renderCard = (card: Card, index: number) => {
-    const isFlipped =
-      flippedCards.includes(card) || matchedCards.includes(card);
+    if (matchedCards.includes(card)) {
+      return null;
+    }
+
+    // Check if the card is matched, if yes, don't render it
+    if (matchedCards.includes(card)) {
+      return null;
+    }
+
+    // Render the card
+    const isFlipped = flippedCards.includes(card);
     let cardImage;
 
     if (isFlipped) {
@@ -288,10 +324,7 @@ const GameBoard = () => {
             score={10}
           />
         </div>
-        <div className="rectangle-2">
-          {/* Render cards here */}
-          {deck.map(renderCard)}
-        </div>
+        <div className="rectangle-2">{deck.map(renderCard)}</div>
         <div className="player2">
           <PlayerCard
             playerName="Wanashudu"
