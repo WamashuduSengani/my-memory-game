@@ -79,8 +79,8 @@ body {
 .rectangle-2 {
   box-sizing: border-box;
   position: absolute;
-  width: 842px;
-  height: 650px;
+  width: 844px;
+  height: 842px;
   left: 50%;
   top: 55%;
   transform: translate(-50%, -50%);
@@ -90,7 +90,16 @@ body {
     rgba(255, 255, 255, 0.1) 102.4%
   );
   border-radius: 8px;
+
+  /* Display as grid */
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(90px, 1fr)
+  ); /* Auto-fill columns with minimum width of 100px */
+  /* Gap between grid items */
 }
+
 .game-board {
   display: flex;
   justify-content: space-between;
