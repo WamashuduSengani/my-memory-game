@@ -1,0 +1,41 @@
+
+.player-card {
+    /* Apply provided styles */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px; /* Decreased padding */
+    gap: 12px; /* Decreased gap */
+    position: relative; /* Changed to relative positioning */
+    width: 220px;
+    height: 344px;
+    background: linear-gradient(160.65deg, rgba(255, 255, 255, 0.6) 0.74%, rgba(255, 255, 255, 0.1) 102.03%);
+    border-radius: 8px;
+    /* Add any other necessary styles */
+  }
+  
+  .player-name {
+    font-family: Poppins;
+    font-size: 20px; /* Decreased font size */
+    font-weight: 700; /* Adjusted font weight */
+    line-height: 1.2; /* Adjusted line height */
+    letter-spacing: -0.02em;
+    text-align: center; /* Centered text */
+    color: #FFFFFF;
+    width: 100%; /* Ensures text fits within the container */
+    overflow: hidden; /* Handles overflow */
+    text-overflow: ellipsis; /* Shows ellipsis for overflow text */
+    white-space: nowrap; /* Prevents text from wrapping */
+  }
+  
+  .player-score {
+    font-family: Poppins;
+    font-size: 24px; /* Decreased font size */
+    font-weight: 600; /* Adjusted font weight */
+    line-height: 1.2; /* Adjusted line height */
+    letter-spacing: -0.02em;
+    text-align: center; /* Centered text */
+    color: #FFFFFF;
+  }
+  
