@@ -1,0 +1,107 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(
+    157.07% 157.07% at 171.6% 173.4%,
+    #ffffff 0%,
+    #3e92ce 100%
+  );
+}
+
+.game-play {
+  font-family: Poppins;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.memory-text {
+  position: absolute;
+  width: 184px;
+  height: 40px;
+  left: 628px;
+  top: 32px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40.187px;
+  line-height: 40px;
+  letter-spacing: 0.0882153px;
+  color: #ffffff;
+}
+
+.exit-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 10px;
+  width: 132px;
+  height: 62px;
+  background: #d4190c;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.restart-button {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 10px;
+  position: absolute;
+  width: 170px;
+  height: 62px;
+  left: 1090px;
+  top: 18px;
+  background: #f4a236;
+  border-radius: 8px;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #ffffff;
+}
+
+.rectangle-2 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 844px;
+  height: 842px;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(
+    133.05deg,
+    rgba(255, 255, 255, 0.6) 0.62%,
+    rgba(255, 255, 255, 0.1) 102.4%
+  );
+  border-radius: 8px;
+
+  /* Display as grid */
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(90px, 1fr)
+  ); /* Auto-fill columns with minimum width of 100px */
+  /* Gap between grid items */
+}
+
+.game-board {
+  display: flex;
+  justify-content: space-between;
+  width: 96%;
+}
