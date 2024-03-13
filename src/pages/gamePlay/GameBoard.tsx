@@ -77,13 +77,15 @@ interface Card {
   suit: string;
   rank: string;
   image: string;
-  color: string; // Path to the card image
+  color: string;
 }
 
 interface Player {
   name: string;
   score: number;
 }
+
+const initialDeck = generateDeck();
 
 const GameBoard = () => {
   const [deck, setDeck] = useState<Card[]>(generateDeck());
@@ -106,7 +108,15 @@ const GameBoard = () => {
   };
 
   const handleRestart = () => {
-    console.log("Restarting the game...");
+    // Reset all state variables to initial values
+    setDeck(shuffleDeck([...initialDeck]));
+    setFlippedCards([]);
+    setMatchedCards([]);
+    setPlayers([
+      { name: "Player 1", score: 0 },
+      { name: "Player 2", score: 0 }
+    ]);
+    setCurrentPlayerIndex(0);
   };
 
   
