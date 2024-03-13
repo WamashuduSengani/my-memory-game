@@ -114,13 +114,13 @@ const GameBoard = () => {
     if (flippedCards.length === 2 || flippedCards.includes(clickedCard) || matchedCards.includes(clickedCard)) {
       return;
     }
-
+  
     const updatedFlippedCards = [...flippedCards, clickedCard];
     setFlippedCards(updatedFlippedCards);
-
+  
     if (updatedFlippedCards.length === 2) {
       const [firstCard, secondCard] = updatedFlippedCards;
-
+  
       if (firstCard.rank === secondCard.rank && firstCard.color === secondCard.color) {
         setMatchedCards([...matchedCards, firstCard, secondCard]);
         setDeck(deck.filter((card) => card !== firstCard && card !== secondCard));
@@ -129,6 +129,13 @@ const GameBoard = () => {
           updatedPlayers[currentPlayerIndex].score += 1;
           return updatedPlayers;
         });
+  
+        if (matchedCards.length + 2 === deck.length) {
+          // All matches found, end the game or handle game completion logic
+          console.log("All matches found, game over!");
+        } else {
+          setFlippedCards([]); // Reset flipped cards
+        }
       } else {
         setTimeout(() => {
           setFlippedCards([]);
@@ -137,6 +144,7 @@ const GameBoard = () => {
       }
     }
   };
+  
 
   const togglePlayerTurn = () => {
     setCurrentPlayerIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
