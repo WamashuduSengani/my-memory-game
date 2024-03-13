@@ -80,10 +80,20 @@ interface Card {
   color: string; // Path to the card image
 }
 
+interface Player {
+  name: string;
+  score: number;
+}
+
 const GameBoard = () => {
   const [deck, setDeck] = useState<Card[]>(generateDeck());
   const [flippedCards, setFlippedCards] = useState<Card[]>([]);
   const [matchedCards, setMatchedCards] = useState<Card[]>([]);
+  const [players, setPlayers] = useState<Player[]>([
+    { name: "Player 1", score: 0 },
+    { name: "Player 2", score: 0 }
+  ]);
+  const [currentPlayerIndex, setCurrentPlayerIndex] = useState<number>(0);
 
   useEffect(() => {
     // Generate and shuffle the deck when the component mounts
@@ -98,38 +108,38 @@ const GameBoard = () => {
   const handleRestart = () => {
     console.log("Restarting the game...");
   };
+
+  
   const handleCardClick = (clickedCard: Card) => {
-    // If there are already 2 flipped cards or the clicked card is already flipped, do nothing
-    if (flippedCards.length === 2 || flippedCards.includes(clickedCard)) {
+    if (flippedCards.length === 2 || flippedCards.includes(clickedCard) || matchedCards.includes(clickedCard)) {
       return;
     }
 
-    // Toggle the clicked card in flippedCards array
     const updatedFlippedCards = [...flippedCards, clickedCard];
     setFlippedCards(updatedFlippedCards);
 
-    // If two cards are flipped, check for a match
     if (updatedFlippedCards.length === 2) {
       const [firstCard, secondCard] = updatedFlippedCards;
 
-      // If ranks match and colors match, update matchedCards array and remove cards from the board
-      if (
-        firstCard.rank === secondCard.rank &&
-        firstCard.color === secondCard.color
-      ) {
+      if (firstCard.rank === secondCard.rank && firstCard.color === secondCard.color) {
         setMatchedCards([...matchedCards, firstCard, secondCard]);
-        setFlippedCards([]); // Reset flipped cards
-        setDeck((deck) =>
-          deck.filter((card) => card !== firstCard && card !== secondCard)
-        ); // Remove matched cards from the deck
-        // Update scores or perform any other relevant actions
+        setDeck(deck.filter((card) => card !== firstCard && card !== secondCard));
+        setPlayers((prevPlayers) => {
+          const updatedPlayers = [...prevPlayers];
+          updatedPlayers[currentPlayerIndex].score += 1;
+          return updatedPlayers;
+        });
       } else {
-        // If either the ranks or colors don't match, flip cards back after a delay
         setTimeout(() => {
           setFlippedCards([]);
+          togglePlayerTurn();
         }, 1000);
       }
     }
+  };
+
+  const togglePlayerTurn = () => {
+    setCurrentPlayerIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
   };
 
   console.log("matchedCards", matchedCards);
@@ -317,19 +327,19 @@ const GameBoard = () => {
         Restart Game
       </button>
       <div className="game-board">
-        <div className="player1">
+      <div className="player1">
           <PlayerCard
-            playerName="John Doe"
+            playerName={players[0].name}
             playerImageSrc={playerImage1}
-            score={10}
+            score={players[0].score}
           />
         </div>
         <div className="rectangle-2">{deck.map(renderCard)}</div>
         <div className="player2">
           <PlayerCard
-            playerName="Wanashudu"
+            playerName={players[1].name}
             playerImageSrc={playerImage2}
-            score={15}
+            score={players[1].score}
           />
         </div>
       </div>
