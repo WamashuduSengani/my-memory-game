@@ -1,0 +1,28 @@
+.current-player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 220px;
+  height: 64px;
+  top: 740px;
+  left: 47px;
+  border-radius: 8px;
+  position: absolute;
+}
+.turn-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 42px;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
