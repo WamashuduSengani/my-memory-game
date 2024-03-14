@@ -144,13 +144,13 @@ const GameBoard = () => {
     ) {
       return;
     }
-
+  
     const updatedFlippedCards = [...flippedCards, clickedCard];
     setFlippedCards(updatedFlippedCards);
-
+  
     if (updatedFlippedCards.length === 2) {
       const [firstCard, secondCard] = updatedFlippedCards;
-
+  
       if (
         firstCard.rank === secondCard.rank &&
         firstCard.color === secondCard.color
@@ -159,14 +159,17 @@ const GameBoard = () => {
         setDeck(
           deck.filter((card) => card !== firstCard && card !== secondCard)
         );
-
+  
         // Update the score for the current player
         setPlayers((prevPlayers) => {
           const updatedPlayers = [...prevPlayers];
           updatedPlayers[currentPlayerIndex].score += 1; // Increment the score for the current player
+          // Save scores to local storage
+          localStorage.setItem("player1Score", updatedPlayers[0].score.toString());
+          localStorage.setItem("player2Score", updatedPlayers[1].score.toString());
           return updatedPlayers;
         });
-
+  
         if (matchedCards.length + 2 === deck.length) {
           console.log("All matches found, game over!");
           navigate("/game-over");
@@ -188,7 +191,7 @@ const GameBoard = () => {
       }
     }
   };
-
+  
   const togglePlayerTurn = () => {
     setCurrentPlayerIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
   };
