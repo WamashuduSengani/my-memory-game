@@ -77,7 +77,6 @@ body {
 
   border-radius: 8px;
   border: 1px;
-  
 }
 .grid {
   position: relative;
@@ -140,22 +139,18 @@ body {
   margin-right: 20px;
 }
 .turn1 {
-    position: absolute;
-    top: calc(-5% + 10px); 
-    left: -27px;
-  }
-  .turn2 {
-    position: absolute;
-    top: calc(-7% + 20px); 
-    right: 287px;
-  }
-  .card-placeholder {
-    width: 72px;
-    height: 112px; 
-    background-color: transparent;
-    position: absolute;
-  }
-  
-  
-  
-  
+  position: absolute;
+  top: calc(-5% + 10px);
+  left: -27px;
+}
+.turn2 {
+  position: absolute;
+  top: calc(-7% + 20px);
+  right: 287px;
+}
+.card-placeholder {
+  width: 72px;
+  height: 112px;
+  background-color: transparent;
+  position: absolute;
+}

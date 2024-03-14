@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./styles.css";
 import PlayerImage from "../../components/playerImage/PlayerImage";
 import PlayerInput from "../../components/playerInput/PlayerInput";
@@ -8,14 +10,16 @@ const playerImage1 = require("../../assets/anime/Group 30099.png");
 const playerImage2 = require("../../assets/anime/Group 30102.png");
 
 const HomePage = () => {
- 
+  const navigate = useNavigate();
+
 
   const handleExit = () => {
     console.log("TODO!!!!");
   };
 
   const handlePlay = () => {
-    console.log("TODO!!!!");
+    navigate("/game");
+
   };
 
   return (
