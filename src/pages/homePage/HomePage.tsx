@@ -1,25 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
 import PlayerImage from "../../components/playerImage/PlayerImage";
 import PlayerInput from "../../components/playerInput/PlayerInput";
 
-
 const playerImage1 = require("../../assets/anime/Group 30099.png");
 const playerImage2 = require("../../assets/anime/Group 30102.png");
 
 const HomePage = () => {
   const navigate = useNavigate();
-
+  const [player1Name, setPlayer1Name] = useState("");
+  const [player2Name, setPlayer2Name] = useState("");
+  const [error, setError] = useState("");
 
   const handleExit = () => {
     console.log("TODO!!!!");
   };
 
   const handlePlay = () => {
-    navigate("/game");
-
+    if (player1Name && player2Name) {
+      localStorage.setItem("player1Name", player1Name);
+      localStorage.setItem("player2Name", player2Name);
+      navigate("/game");
+    } else {
+      setError("Please enter names for both players.");
+    }
   };
 
   return (
@@ -34,8 +40,21 @@ const HomePage = () => {
         <PlayerImage src={playerImage2} alt="Player 2" />
       </div>
       <div className="input-container">
-        <PlayerInput placeholder="Name of Player 1" />
-        <PlayerInput placeholder="Name of Player 2" />
+        <PlayerInput
+          placeholder="Name of Player 1"
+          value={player1Name}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPlayer1Name(e.target.value)
+          }
+        />
+        <PlayerInput
+          placeholder="Name of Player 2"
+          value={player2Name}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPlayer2Name(e.target.value)
+          }
+        />
+        {error && <p className="error">{error}</p>}
       </div>
       <button className="play-button" onClick={handlePlay}>
         Let's play

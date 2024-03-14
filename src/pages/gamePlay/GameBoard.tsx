@@ -108,6 +108,16 @@ const GameBoard = () => {
     // Generate and shuffle the deck when the component mounts
     const newDeck = generateDeck();
     setDeck(shuffleDeck(newDeck));
+
+    // Extract player names from local storage
+    const player1Name = localStorage.getItem("player1Name");
+    const player2Name = localStorage.getItem("player2Name");
+    if (player1Name && player2Name) {
+      setPlayers([
+        { name: player1Name, score: 0 },
+        { name: player2Name, score: 0 },
+      ]);
+    }
   }, []);
 
   const handleExit = () => {
