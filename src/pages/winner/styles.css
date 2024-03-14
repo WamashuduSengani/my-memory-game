@@ -1,0 +1,98 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(
+    157.07% 157.07% at 171.6% 173.4%,
+    #ffffff 0%,
+    #3e92ce 100%
+  );
+  font-family: "Poppins", sans-serif;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100vh;
+  position: relative;
+}
+.container h1 {
+  font-family: Poppins;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.18000000715255737px;
+  text-align: center;
+  color: #ffffff;
+}
+.player {
+  font-family: Poppins;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.18000000715255737px;
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+}
+.score-board1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 535px;
+  height: 101.37px;
+  border-radius: 7.802296161651611;
+  padding: 10px;
+  margin-top: 20px;
+  background: linear-gradient(92.15deg, #ffd975 35.31%, #ffffff 135.61%);
+  border-radius: 7.8px;
+}
+.score-board2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 535px;
+  height: 101.37px;
+  border-radius: 7.802296161651611;
+  padding: 10px;
+  margin-top: 60px;
+  background: #ffffff;
+  border-radius: 7.8px;
+}
+.playagain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 16px;
+  gap: 10px;
+
+  position: absolute;
+  width: 164px;
+  height: 56px;
+  top: 760px;
+
+  background: #a7daff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 20px;
+}
+.trophy-image {
+  margin-right: 700px;
+  margin-top: -80px;
+}
