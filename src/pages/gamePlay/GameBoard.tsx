@@ -93,7 +93,7 @@ const GameBoard = () => {
   const [matchedCards, setMatchedCards] = useState<Card[]>([]);
   const [players, setPlayers] = useState<Player[]>([
     { name: "Player 1", score: 0 },
-    { name: "Player 2", score: 0 }
+    { name: "Player 2", score: 0 },
   ]);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState<number>(0);
 
@@ -114,34 +114,42 @@ const GameBoard = () => {
     setMatchedCards([]);
     setPlayers([
       { name: "Player 1", score: 0 },
-      { name: "Player 2", score: 0 }
+      { name: "Player 2", score: 0 },
     ]);
     setCurrentPlayerIndex(0);
   };
 
-  
   const handleCardClick = (clickedCard: Card) => {
-    if (flippedCards.length === 2 || flippedCards.includes(clickedCard) || matchedCards.includes(clickedCard)) {
+    if (
+      flippedCards.length === 2 ||
+      flippedCards.includes(clickedCard) ||
+      matchedCards.includes(clickedCard)
+    ) {
       return;
     }
-  
+
     const updatedFlippedCards = [...flippedCards, clickedCard];
     setFlippedCards(updatedFlippedCards);
-  
+
     if (updatedFlippedCards.length === 2) {
       const [firstCard, secondCard] = updatedFlippedCards;
-  
-      if (firstCard.rank === secondCard.rank && firstCard.color === secondCard.color) {
+
+      if (
+        firstCard.rank === secondCard.rank &&
+        firstCard.color === secondCard.color
+      ) {
         setMatchedCards([...matchedCards, firstCard, secondCard]);
-        setDeck(deck.filter((card) => card !== firstCard && card !== secondCard));
-  
+        setDeck(
+          deck.filter((card) => card !== firstCard && card !== secondCard)
+        );
+
         // Update the score for the current player
         setPlayers((prevPlayers) => {
           const updatedPlayers = [...prevPlayers];
           updatedPlayers[currentPlayerIndex].score += 1; // Increment the score for the current player
           return updatedPlayers;
         });
-  
+
         if (matchedCards.length + 2 === deck.length) {
           console.log("All matches found, game over!");
         } else {
@@ -155,18 +163,13 @@ const GameBoard = () => {
       }
     }
   };
-  
-  
 
   const togglePlayerTurn = () => {
     setCurrentPlayerIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
-  };  
+  };
 
   console.log("matchedCards", matchedCards);
 
-  // Function to render a card based on game state
-  // Update UI based on game state
-  // Update UI based on game state
   const renderCard = (card: Card, index: number) => {
     if (matchedCards.includes(card)) {
       return null;
@@ -340,28 +343,30 @@ const GameBoard = () => {
   return (
     <div className="game-play">
       <div className="memory-text">Memory</div>
-      <button className="exit-button" onClick={handleExit}>
-        Exit Game
-      </button>
-      <button className="restart-button" onClick={handleRestart}>
-        Restart Game
-      </button>
-      <div className="game-board">
+      <div className="buttons">
+        <button className="restart-button" onClick={handleRestart}>
+          Restart Game
+        </button>
+        <button className="exit-button" onClick={handleExit}>
+          Exit Game
+        </button>
+      </div>
       <div className="player1">
-          <PlayerCard
-            playerName={players[0].name}
-            playerImageSrc={playerImage1}
-            score={players[0].score}
-          />
-        </div>
-        <div className="rectangle-2">{deck.map(renderCard)}</div>
-        <div className="player2">
-          <PlayerCard
-            playerName={players[1].name}
-            playerImageSrc={playerImage2}
-            score={players[1].score}
-          />
-        </div>
+        <PlayerCard
+          playerName={players[0].name}
+          playerImageSrc={playerImage1}
+          score={players[0].score}
+        />
+      </div>
+      <div className="game-board">
+        <div className="grid">{deck.map(renderCard)}</div>
+      </div>
+      <div className="player2">
+        <PlayerCard
+          playerName={players[1].name}
+          playerImageSrc={playerImage2}
+          score={players[1].score}
+        />
       </div>
     </div>
   );
