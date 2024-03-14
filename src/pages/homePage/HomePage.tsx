@@ -15,7 +15,7 @@ const HomePage = () => {
   const [error, setError] = useState("");
 
   const handleExit = () => {
-    console.log("TODO!!!!");
+    window.location.href = "https://www.google.com";
   };
 
   const handlePlay = () => {

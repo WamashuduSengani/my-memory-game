@@ -1,24 +1,19 @@
 body {
-  margin: 0;
-  padding: 0;
   background: radial-gradient(
     157.07% 157.07% at 171.6% 173.4%,
     #ffffff 0%,
     #3e92ce 100%
   );
-  font-family: "Poppins", sans-serif;
+  height: 115vh;
 }
-
 .game-play {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
-  height: 100vh;
   position: relative;
 }
 .memory-text {
@@ -29,17 +24,7 @@ body {
   line-height: 40px;
   letter-spacing: 0.0882153px;
   color: #ffffff;
-  margin-top: 20px;
-}
-.buttons {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
+  margin-top: -20px;
 }
 .exit-button {
   background: #d4190c;
@@ -53,7 +38,147 @@ body {
   cursor: pointer;
   width: 132px;
   height: 62px;
+  margin-top: 10px;
 }
+.restart-button {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 10px;
+
+  position: absolute;
+  width: 170px;
+  height: 62px;
+  left: -330px;
+  top: 27px;
+
+  background: #f4a236;
+  border-radius: 8px;
+
+  color: #ffffff;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  gap: 10px;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin: 480px auto 0;
+  width: 842px;
+  height: 5px;
+  position: relative;
+  border-radius: 8px;
+  margin-bottom: auto;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  display: flex;
+  width: 100%;
+  background: linear-gradient(
+    133.05deg,
+    rgba(255, 255, 255, 0.6) 0.62%,
+    rgba(255, 255, 255, 0.1) 102.4%
+  );
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(77px, 1fr));
+  gap: 10px;
+  margin: 20px auto;
+  padding: 10px;
+}
+.grid::before {
+  content: "";
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.grid::after {
+  content: "";
+  grid-column: 1 / -1;
+  grid-row: -1;
+}
+.player1 {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: 20px;
+}
+.player2 {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 20px;
+}
+.turn1 {
+  position: absolute;
+  top: calc(-19% + 10px);
+  left: -27px;
+  position: fixed;
+}
+.turn2 {
+  position: absolute;
+  top: calc(-20% + 20px);
+  right: 287px;
+  position: fixed;
+}
+.card-placeholder {
+  width: 72px;
+  height: 112px;
+  background-color: transparent;
+  position: absolute;
+}
+
+
+/* .game-play {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+
 .restart-button {
   padding: 16px;
   background: #f4a236;
@@ -68,6 +193,7 @@ body {
   cursor: pointer;
   width: 172px;
   height: 62px;
+  margin-right: 160px;
 }
 .game-board {
   display: flex;
@@ -77,6 +203,7 @@ body {
 
   border-radius: 8px;
   border: 1px;
+  margin-top: 70px;
 }
 .grid {
   position: relative;
@@ -153,4 +280,4 @@ body {
   height: 112px;
   background-color: transparent;
   position: absolute;
-}
+} */

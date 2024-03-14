@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles.css";
+import { useNavigate } from "react-router-dom";
 const winnerImage = require("../../assets/anime/Group 30120.png");
 const player1Image = require("../../assets/anime/Group 30116.png");
 const player2Image = require("../../assets/anime/Group 30116 (1).png");
@@ -10,6 +11,8 @@ const Winner = () => {
   const [player2Name, setPlayer2Name] = useState("");
   const [player1Score, setPlayer1Score] = useState(0);
   const [player2Score, setPlayer2Score] = useState(0);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const storedPlayer1Name = localStorage.getItem("player1Name");
@@ -29,6 +32,14 @@ const Winner = () => {
       setPlayer2Score(parseInt(storedPlayer2Score, 10));
     }
   }, []);
+
+    const handlePlayAgain = () => {
+        localStorage.removeItem("player1Name");
+        localStorage.removeItem("player2Name");
+        localStorage.removeItem("player1Score");
+        localStorage.removeItem("player2Score");
+        navigate("/");
+    };
 
   // Determine the winner based on scores
   const winner = player1Score > player2Score ? player1Name : player2Name;
@@ -55,7 +66,7 @@ const Winner = () => {
         <p className="">{loser}</p>
         <p className="">Score: {loserScore}</p>
       </div>
-      <button className="playagain">PLAY AGAIN</button>
+      <button className="playagain" onClick={handlePlayAgain}>PLAY AGAIN</button>
     </div>
   );
 };

@@ -12,7 +12,7 @@ const PlayerCard = ({ playerName, playerImageSrc, score }: PlayerCardProps) => {
     <div className="player-card">
       <img src={playerImageSrc} alt="Player" className="player-image" />
       <div className="player-name">{playerName}</div>
-      <div className="player-score">Score: {score}</div> {/* Updated score display */}
+      <div className="player-score">Score: {score}</div>
     </div>
   );
 };

@@ -73,8 +73,8 @@ const spadesK = require("../../assets/spades/K.png");
 const spadesQ = require("../../assets/spades/Q.png");
 
 // Importing joker card images
-const joker1 = require("../../assets/joker/Joker_1.png");
-const joker2 = require("../../assets/joker/Joker_2.png");
+const joker1 = require("../../assets/joker/joker.png");
+const joker2 = require("../../assets/joker/joker.png");
 
 const match = require("../../assets/anime/Group 30113.png");
 
@@ -121,7 +121,7 @@ const GameBoard = () => {
   }, []);
 
   const handleExit = () => {
-    console.log("TODO!!!!");
+    window.location.href = "https://www.google.com";
   };
 
   const handleRestart = () => {
@@ -144,13 +144,13 @@ const GameBoard = () => {
     ) {
       return;
     }
-  
+
     const updatedFlippedCards = [...flippedCards, clickedCard];
     setFlippedCards(updatedFlippedCards);
-  
+
     if (updatedFlippedCards.length === 2) {
       const [firstCard, secondCard] = updatedFlippedCards;
-  
+
       if (
         firstCard.rank === secondCard.rank &&
         firstCard.color === secondCard.color
@@ -159,17 +159,23 @@ const GameBoard = () => {
         setDeck(
           deck.filter((card) => card !== firstCard && card !== secondCard)
         );
-  
+
         // Update the score for the current player
         setPlayers((prevPlayers) => {
           const updatedPlayers = [...prevPlayers];
           updatedPlayers[currentPlayerIndex].score += 1; // Increment the score for the current player
           // Save scores to local storage
-          localStorage.setItem("player1Score", updatedPlayers[0].score.toString());
-          localStorage.setItem("player2Score", updatedPlayers[1].score.toString());
+          localStorage.setItem(
+            "player1Score",
+            updatedPlayers[0].score.toString()
+          );
+          localStorage.setItem(
+            "player2Score",
+            updatedPlayers[1].score.toString()
+          );
           return updatedPlayers;
         });
-  
+
         if (matchedCards.length + 2 === deck.length) {
           console.log("All matches found, game over!");
           navigate("/game-over");
@@ -191,7 +197,7 @@ const GameBoard = () => {
       }
     }
   };
-  
+
   const togglePlayerTurn = () => {
     setCurrentPlayerIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
   };
@@ -199,7 +205,6 @@ const GameBoard = () => {
   console.log("matchedCards", matchedCards);
 
   const renderCard = (card: Card, index: number) => {
-
     // Check if the card is matched, if yes, don't render it
     if (matchedCards.includes(card)) {
       return null;
