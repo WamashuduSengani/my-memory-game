@@ -4,6 +4,7 @@ import PlayerCard from "../../components/playerCard/PlayerCard";
 import Card from "../../components/card/Card";
 import { generateDeck, shuffleDeck } from "../../utils/cardUtils";
 import Match from "../../components/match/Match";
+import PlayerIndicator from "../../components/playerIndicator/PlayerIndicator";
 
 // Importing player images
 const playerImage1 = require("../../assets/anime/Group 30099.png");
@@ -156,7 +157,8 @@ const GameBoard = () => {
 
         if (matchedCards.length + 2 === deck.length) {
           console.log("All matches found, game over!");
-        } {
+        }
+        {
           // Show Match component and hide grid for a few seconds
           setShowMatch(true);
           setTimeout(() => {
@@ -368,6 +370,12 @@ const GameBoard = () => {
           score={players[0].score}
         />
       </div>
+      <div className="turn1">
+        {currentPlayerIndex === 0 && (
+          <PlayerIndicator backgroundColor="green" textColor="#FFFFFF" />
+        )}
+      </div>
+
       {showMatch && <Match imageSrc={match} />}
       {!showMatch && (
         <div className="game-board">
@@ -380,6 +388,11 @@ const GameBoard = () => {
           playerImageSrc={playerImage2}
           score={players[1].score}
         />
+      </div>
+      <div className="turn2">
+        {currentPlayerIndex === 1 && (
+          <PlayerIndicator backgroundColor="white" textColor="#489DDA" />
+        )}
       </div>
     </div>
   );

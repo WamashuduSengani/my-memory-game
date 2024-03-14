@@ -138,3 +138,15 @@ body {
   margin-left: auto;
   margin-right: 20px;
 }
+.turn1 {
+    position: absolute;
+    top: calc(-5% + 10px); 
+    left: -27px;
+  }
+  .turn2 {
+    position: absolute;
+    top: calc(-7% + 20px); 
+    right: 287px;
+  }
+  
+  
