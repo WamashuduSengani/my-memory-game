@@ -1,0 +1,9 @@
+.match {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 842px;
+    height: 844px;
+    border-radius: 8px;
+  }

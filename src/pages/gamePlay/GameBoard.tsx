@@ -3,6 +3,7 @@ import "./styles.css";
 import PlayerCard from "../../components/playerCard/PlayerCard";
 import Card from "../../components/card/Card";
 import { generateDeck, shuffleDeck } from "../../utils/cardUtils";
+import Match from "../../components/match/Match";
 
 // Importing player images
 const playerImage1 = require("../../assets/anime/Group 30099.png");
@@ -73,6 +74,8 @@ const spadesQ = require("../../assets/spades/Q.png");
 const joker1 = require("../../assets/joker/Joker_1.png");
 const joker2 = require("../../assets/joker/Joker_2.png");
 
+const match = require("../../assets/anime/Group 30113.png");
+
 interface Card {
   suit: string;
   rank: string;
@@ -96,6 +99,7 @@ const GameBoard = () => {
     { name: "Player 2", score: 0 },
   ]);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState<number>(0);
+  const [showMatch, setShowMatch] = useState(false);
 
   useEffect(() => {
     // Generate and shuffle the deck when the component mounts
@@ -152,8 +156,14 @@ const GameBoard = () => {
 
         if (matchedCards.length + 2 === deck.length) {
           console.log("All matches found, game over!");
-        } else {
-          setFlippedCards([]);
+        } {
+          // Show Match component and hide grid for a few seconds
+          setShowMatch(true);
+          setTimeout(() => {
+            setShowMatch(false);
+            setFlippedCards([]);
+            togglePlayerTurn();
+          }, 2000);
         }
       } else {
         setTimeout(() => {
@@ -358,9 +368,12 @@ const GameBoard = () => {
           score={players[0].score}
         />
       </div>
-      <div className="game-board">
-        <div className="grid">{deck.map(renderCard)}</div>
-      </div>
+      {showMatch && <Match imageSrc={match} />}
+      {!showMatch && (
+        <div className="game-board">
+          <div className="grid">{deck.map(renderCard)}</div>
+        </div>
+      )}
       <div className="player2">
         <PlayerCard
           playerName={players[1].name}
