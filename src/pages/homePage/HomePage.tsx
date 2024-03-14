@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Modal from "react-modal";
 import "./styles.css";
 import PlayerImage from "../../components/playerImage/PlayerImage";
 import PlayerInput from "../../components/playerInput/PlayerInput";
@@ -13,6 +13,7 @@ const HomePage = () => {
   const [player1Name, setPlayer1Name] = useState("");
   const [player2Name, setPlayer2Name] = useState("");
   const [error, setError] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(true); // State to control modal visibility
 
   const handleExit = () => {
     window.location.href = "https://www.google.com";
@@ -22,6 +23,7 @@ const HomePage = () => {
     if (player1Name && player2Name) {
       localStorage.setItem("player1Name", player1Name);
       localStorage.setItem("player2Name", player2Name);
+      setModalIsOpen(false); // Close the modal
       navigate("/game");
     } else {
       setError("Please enter names for both players.");
@@ -39,26 +41,24 @@ const HomePage = () => {
         <PlayerImage src={playerImage1} alt="Player 1" />
         <PlayerImage src={playerImage2} alt="Player 2" />
       </div>
-      <div className="input-container">
-        <PlayerInput
-          placeholder="Name of Player 1"
-          value={player1Name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setPlayer1Name(e.target.value)
-          }
-        />
-        <PlayerInput
-          placeholder="Name of Player 2"
-          value={player2Name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setPlayer2Name(e.target.value)
-          }
-        />
-        {error && <p className="error">{error}</p>}
-      </div>
-      <button className="play-button" onClick={handlePlay}>
-        Let's play
-      </button>
+      <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} className="modal">
+        <div className="input-container">
+          <PlayerInput
+            placeholder="Name of Player 1"
+            value={player1Name}
+            onChange={(e) => setPlayer1Name(e.target.value)}
+          />
+          <PlayerInput
+            placeholder="Name of Player 2"
+            value={player2Name}
+            onChange={(e) => setPlayer2Name(e.target.value)}
+          />
+          {error && <p className="error">{error}</p>}
+          <button className="play-button" onClick={handlePlay}>
+            Let's play
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };
