@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import GameBoard from './pages/gamePlay/GameBoard';
-import Winner from './pages/winner/Winner';
 
 
 const root = ReactDOM.createRoot(
@@ -10,7 +9,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Winner />
+    <GameBoard />
   </React.StrictMode>
 );
 
