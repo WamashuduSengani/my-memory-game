@@ -183,9 +183,6 @@ const GameBoard = () => {
   console.log("matchedCards", matchedCards);
 
   const renderCard = (card: Card, index: number) => {
-    if (matchedCards.includes(card)) {
-      return null;
-    }
 
     // Check if the card is matched, if yes, don't render it
     if (matchedCards.includes(card)) {
