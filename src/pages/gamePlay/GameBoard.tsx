@@ -5,6 +5,7 @@ import Card from "../../components/card/Card";
 import { generateDeck, shuffleDeck } from "../../utils/cardUtils";
 import Match from "../../components/match/Match";
 import PlayerIndicator from "../../components/playerIndicator/PlayerIndicator";
+import { useNavigate } from "react-router-dom";
 
 // Importing player images
 const playerImage1 = require("../../assets/anime/Group 30099.png");
@@ -101,6 +102,7 @@ const GameBoard = () => {
   ]);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState<number>(0);
   const [showMatch, setShowMatch] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Generate and shuffle the deck when the component mounts
@@ -157,6 +159,7 @@ const GameBoard = () => {
 
         if (matchedCards.length + 2 === deck.length) {
           console.log("All matches found, game over!");
+          navigate("/game-over");
         }
         {
           // Show Match component and hide grid for a few seconds
