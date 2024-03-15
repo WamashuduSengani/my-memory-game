@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "react-modal";
 import "./styles.css";
 import PlayerImage from "../../components/playerImage/PlayerImage";
 import PlayerInput from "../../components/playerInput/PlayerInput";
@@ -51,10 +50,10 @@ const HomePage = () => {
           onChange={(e) => setPlayer2Name(e.target.value)}
         />
         {error && <p className="error">{error}</p>}
-        <button className="play-button" onClick={handlePlay}>
-          Let's play
-        </button>
       </div>
+      <button className="play-button" onClick={handlePlay}>
+        Let's play
+      </button>
     </div>
   );
 };

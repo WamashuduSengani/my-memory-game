@@ -372,7 +372,7 @@ const GameBoard = () => {
 
   return (
     <div className="game-play">
-      <div className="memory-text">Memory</div>
+      <div className="memory">Memory</div>
       <div className="buttons">
         <button className="restart-button" onClick={handleRestart}>
           Restart Game
@@ -381,36 +381,41 @@ const GameBoard = () => {
           Exit Game
         </button>
       </div>
-      <div className="player1">
-        <PlayerCard
-          playerName={players[0].name}
-          playerImageSrc={playerImage1}
-          score={players[0].score}
-        />
-      </div>
-      <div className="turn1">
-        {currentPlayerIndex === 0 && (
-          <PlayerIndicator backgroundColor="green" textColor="#FFFFFF" />
-        )}
-      </div>
-
-      {showMatch && <Match imageSrc={match} />}
-      {!showMatch && (
-        <div className="game-board">
-          <div className="grid">{deck.map(renderCard)}</div>
+      <div className="parent">
+        <div className="player1">
+          <div className="player1Card">
+            <PlayerCard
+              playerName={players[0].name}
+              playerImageSrc={playerImage1}
+              score={players[0].score}
+            />
+          </div>
+          <div className="player1Turn">
+            {currentPlayerIndex === 0 && (
+              <PlayerIndicator backgroundColor="green" textColor="#FFFFFF" />
+            )}
+          </div>
         </div>
-      )}
-      <div className="player2">
-        <PlayerCard
-          playerName={players[1].name}
-          playerImageSrc={playerImage2}
-          score={players[1].score}
-        />
-      </div>
-      <div className="turn2">
-        {currentPlayerIndex === 1 && (
-          <PlayerIndicator backgroundColor="white" textColor="#489DDA" />
+        {showMatch && <Match imageSrc={match} />}
+        {!showMatch && (
+          <div className="game-board">
+            <div className="grid">{deck.map(renderCard)}</div>
+          </div>
         )}
+        <div className="player2">
+          <div className="player2Card">
+            <PlayerCard
+              playerName={players[1].name}
+              playerImageSrc={playerImage2}
+              score={players[1].score}
+            />
+          </div>
+          <div className="player2Turn">
+            {currentPlayerIndex === 1 && (
+              <PlayerIndicator backgroundColor="white" textColor="#489DDA" />
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
